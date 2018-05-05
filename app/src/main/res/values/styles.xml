@@ -1,0 +1,82 @@
+<resources>
+
+    <style name="Theme.SushiPlateApp" parent="Base.Theme.SushiPlateApp"></style>
+
+    <style name="Base.Theme.SushiPlateApp" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+    </style>
+
+    <!--Settings-->
+
+    <style name="SettingItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="SettingItem.Category">
+        <item name="android:clickable">false</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/color_accent</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="SettingItem.ListItem">
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="SettingItem.Text">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+    <style name="SettingItem.Value">
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="SettingItem.SubText">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+
+    <style name="SettingItem.Button">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <!--dialog-->
+
+    <style name="DialogTheme">
+        <item name="android:background">@color/window_background</item>
+    </style>
+
+    <style name="DialogTheme.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="DialogTheme.Message">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="DialogTheme.Button" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/button_accent</item>
+    </style>
+
+
+</resources>

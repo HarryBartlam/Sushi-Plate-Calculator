@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:minWidth="350dp"
+    android:orientation="vertical"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        style="@style/DialogTheme.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Blue somehting" />
+
+    <TextView
+        android:id="@+id/dialog_message"
+        style="@style/DialogTheme.Message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="the default value of this plate is £9999" />
+
+    <EditText
+        android:id="@+id/dialog_value_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_plate_value"
+        android:inputType="numberDecimal"
+        android:maxLength="10"
+        android:selectAllOnFocus="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_cancel"
+            style="@style/DialogTheme.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_cancel" />
+
+        <Button
+            android:id="@+id/dialog_save"
+            style="@style/DialogTheme.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_save" />
+    </LinearLayout>
+
+
+</LinearLayout>

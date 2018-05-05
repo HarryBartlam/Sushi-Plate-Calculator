@@ -1,0 +1,17 @@
+dependencies {
+    compile "com.trello.rxlifecycle2:rxlifecycle:$rxLifecycleVer"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rxLifecycleVer"
+    compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxLifecycleVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxBindingVer"
+
+    compile "com.f2prateek.rx.preferences2:rx-preferences:$rxPrefVer"
+//    compile "com.tbruyelle.rxpermissions:rxpermissions:$rxPermVer"
+//
+//    compile "com.github.bumptech.glide:glide:$glideVer"
+
+
+}

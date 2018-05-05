@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/settings_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/settings_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ToolbarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/list_divider"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/SettingItem.Category"
+                android:text="@string/category_plates" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/list_divider" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_green_plate"
+                app:subtitleRes="@string/subtitle_pref_green"
+                app:titleRes="@string/title_pref_green" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_blue_plate"
+                app:subtitleRes="@string/subtitle_pref_blue"
+                app:titleRes="@string/title_pref_blue" />
+
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_purple_plate"
+                app:subtitleRes="@string/subtitle_pref_purple"
+                app:titleRes="@string/title_pref_purple" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_orange_plate"
+                app:subtitleRes="@string/subtitle_pref_orange"
+                app:titleRes="@string/title_pref_orange" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_pink_plate"
+                app:subtitleRes="@string/subtitle_pref_pink"
+                app:titleRes="@string/title_pref_pink" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_gray_plate"
+                app:subtitleRes="@string/subtitle_pref_gray"
+                app:titleRes="@string/title_pref_gray" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_gold_plate"
+                app:subtitleRes="@string/subtitle_pref_gold"
+                app:titleRes="@string/title_pref_gold" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:prefRes="@string/pref_sumo_plate"
+                app:subtitleRes="@string/subtitle_pref_sumo"
+                app:titleRes="@string/title_pref_sumo" />
+
+            <TextView
+                style="@style/SettingItem.Category"
+                android:text="@string/category_misc" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/list_divider" />
+
+            <com.simplyapp.plate.calculator.ui.views.SettingPrefView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mode="CheckBox"
+                app:prefRes="@string/pref_animation"
+                app:subtitleRes="@string/subtitle_pref_animate"
+                app:titleRes="@string/title_pref_animate" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

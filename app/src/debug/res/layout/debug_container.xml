@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.simplyapp.plate.calculator.ui.DebugDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/debug_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="290dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#000000">
+
+        <ScrollView
+            android:id="@+id/debug_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fitsSystemWindows="true" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</com.simplyapp.plate.calculator.ui.DebugDrawerLayout>

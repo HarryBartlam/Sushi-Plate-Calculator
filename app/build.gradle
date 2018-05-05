@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: 'app_android.gradle'
+
+android {
+    buildToolsVersion buildTools
+
+    defaultConfig {
+        versionName "1.1.1"
+        versionCode 4
+        manifestPlaceholders = [appName: "Sushi Plate Calculator"]
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release {
+
+        }
+
+        debug {
+        }
+
+        qa {
+        }
+    }
+    flavorDimensions defaultDimen
+
+
+    productFlavors {
+        standard {
+            dimension defaultDimen
+            buildConfigField "String", "BASE_URL", "\"\""
+        }
+    }
+}
+
+apply from: '../common.gradle'
+apply from: 'app_dependencies.gradle'

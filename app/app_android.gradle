@@ -1,0 +1,128 @@
+android {
+    compileSdkVersion(compileSdk)
+    buildToolsVersion(buildTools)
+
+
+    defaultConfig {
+        applicationId "com.simplyapp.plate.calculator"
+        minSdkVersion(minSdk)
+        targetSdkVersion(targetSdk)
+
+        multiDexEnabled false
+
+        buildConfigField "int", "TEST_VERSION", "25"
+        testInstrumentationRunner 'com.simplyapp.plate.calculator.MyTestRunner'
+    }
+
+    def props = new Properties()
+
+    props.load(new FileInputStream(file("release.properties")))
+
+    signingConfigs {
+        release {
+            storeFile file(props.keyStore)
+            storePassword props.keyStorePassword
+            keyAlias props.keyAlias
+            keyPassword props.keyAliasPassword
+        }
+        debug {
+            storeFile file("debug.keystore")
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            manifestPlaceholders = [appNameSuffix: ""]
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles '../proguard/butterknife.pro'
+            proguardFiles '../proguard/calligraphy.pro'
+            proguardFiles '../proguard/dagger.pro'
+            proguardFiles '../proguard/google-analytics.pro'
+            proguardFiles '../proguard/gson.pro'
+            proguardFiles '../proguard/hockey.pro'
+            proguardFiles '../proguard/kotlin.pro'
+            proguardFiles '../proguard/okhttp.pro'
+            proguardFiles '../proguard/okhttp3.pro'
+            proguardFiles '../proguard/okio.pro'
+            proguardFiles '../proguard/play-services.pro'
+            proguardFiles '../proguard/retrofit.pro'
+            proguardFiles '../proguard/retrofit2.pro'
+            proguardFiles '../proguard/retrolambda.pro'
+            proguardFiles '../proguard/rxjava.pro'
+            proguardFiles '../proguard/sqlite.pro'
+            proguardFiles '../proguard/support-design.pro'
+            proguardFiles '../proguard/support-v7-appcompat.pro'
+            proguardFiles '../proguard/support-v7-cardview.pro'
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            manifestPlaceholders = [appNameSuffix: " - Dev"]
+            applicationIdSuffix ".debug"
+            versionNameSuffix "dev"
+            signingConfig signingConfigs.debug
+
+            buildConfigField "boolean", "DEV", "true"
+        }
+
+        qa {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            manifestPlaceholders = [appNameSuffix: " - QA"]
+            applicationIdSuffix ".qa"
+            versionNameSuffix "qa"
+            signingConfig signingConfigs.debug
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+        unitTests.all {
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    sourceSets {
+        test {
+            java.srcDirs += "$projectDir/src/sharedTest/java"
+        }
+
+        androidTest {
+            java.srcDirs += "$projectDir/src/sharedTest/java"
+        }
+    }
+}
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.guava:guava:22.0'
+    }
+}
+
+task testBuild {}
+
+testBuild.dependsOn('clean', 'ktlint', 'lintStandardRelease', 'testStandardDebugUnitTest', 'testStandardReleaseUnitTest', 'assembleDebug', 'assembleRelease')
+
