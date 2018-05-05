@@ -1,12 +1,11 @@
 package com.simplyapp.plate.calculator.util
 
-import org.junit.rules.TestRule
-import org.junit.runner.Description
-import org.junit.runners.model.Statement
-
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
+import org.junit.rules.TestRule
+import org.junit.runner.Description
+import org.junit.runners.model.Statement
 
 /**
  * This rule registers SchedulerHooks for RxJava and RxAndroid to ensure that subscriptions always
@@ -22,11 +21,11 @@ class RxSchedulersOverrideRule : TestRule {
             @Throws(Throwable::class)
             override fun evaluate() {
                 RxAndroidPlugins.reset()
-                RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
+                RxAndroidPlugins.setInitMainThreadSchedulerHandler { _ -> Schedulers.trampoline() }
 
                 RxJavaPlugins.reset()
-                RxJavaPlugins.setIoSchedulerHandler { scheduler -> Schedulers.trampoline() }
-                RxJavaPlugins.setComputationSchedulerHandler { scheduler -> Schedulers.trampoline() }
+                RxJavaPlugins.setIoSchedulerHandler { _ -> Schedulers.trampoline() }
+                RxJavaPlugins.setComputationSchedulerHandler { _ -> Schedulers.trampoline() }
 
                 base.evaluate()
 

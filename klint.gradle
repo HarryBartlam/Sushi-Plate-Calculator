@@ -1,0 +1,14 @@
+configurations {
+    ktlint
+}
+
+task ktlint(type: JavaExec) {
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+check.dependsOn ktlint
+kapt {
+    generateStubs = true
+}

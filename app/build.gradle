@@ -3,39 +3,226 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-apply from: 'app_android.gradle'
-
 android {
-    buildToolsVersion buildTools
+    compileSdkVersion(compileSdk)
+    buildToolsVersion(buildTools)
 
     defaultConfig {
+        applicationId "com.simplyapp.plate.calculator"
+        minSdkVersion(minSdk)
+        targetSdkVersion(targetSdk)
+
+        multiDexEnabled false
         versionName "1.1.1"
         versionCode 4
         manifestPlaceholders = [appName: "Sushi Plate Calculator"]
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+
+        buildConfigField "int", "TEST_VERSION", "25"
+        buildConfigField "String", "BASE_URL", "\"\""
+
+    }
+
+    def props = new Properties()
+
+    props.load(new FileInputStream(file("release.properties")))
+
+    signingConfigs {
+        release {
+            storeFile file(props.keyStore)
+            storePassword props.keyStorePassword
+            keyAlias props.keyAlias
+            keyPassword props.keyAliasPassword
+        }
+        debug {
+            storeFile file("debug.keystore")
+        }
     }
 
     buildTypes {
         release {
-
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            manifestPlaceholders = [appNameSuffix: ""]
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles '../proguard/butterknife.pro'
+            proguardFiles '../proguard/calligraphy.pro'
+            proguardFiles '../proguard/dagger.pro'
+            proguardFiles '../proguard/google-analytics.pro'
+            proguardFiles '../proguard/gson.pro'
+            proguardFiles '../proguard/hockey.pro'
+            proguardFiles '../proguard/kotlin.pro'
+            proguardFiles '../proguard/okhttp.pro'
+            proguardFiles '../proguard/okhttp3.pro'
+            proguardFiles '../proguard/okio.pro'
+            proguardFiles '../proguard/play-services.pro'
+            proguardFiles '../proguard/retrofit.pro'
+            proguardFiles '../proguard/retrofit2.pro'
+            proguardFiles '../proguard/retrolambda.pro'
+            proguardFiles '../proguard/rxjava.pro'
+            proguardFiles '../proguard/sqlite.pro'
+            proguardFiles '../proguard/support-design.pro'
+            proguardFiles '../proguard/support-v7-appcompat.pro'
+            proguardFiles '../proguard/support-v7-cardview.pro'
         }
 
         debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            manifestPlaceholders = [appNameSuffix: " - Dev"]
+            applicationIdSuffix ".debug"
+            versionNameSuffix "dev"
+            signingConfig signingConfigs.debug
+
+            buildConfigField "boolean", "DEV", "true"
         }
 
         qa {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            manifestPlaceholders = [appNameSuffix: " - QA"]
+            applicationIdSuffix ".qa"
+            versionNameSuffix "qa"
+            signingConfig signingConfigs.debug
         }
     }
-    flavorDimensions defaultDimen
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    flavorDimensions defaultDimen
 
     productFlavors {
         standard {
             dimension defaultDimen
-            buildConfigField "String", "BASE_URL", "\"\""
         }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+        unitTests.all {
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    sourceSets {
+        test {
+            java.srcDirs += "$projectDir/src/sharedTest/java"
+        }
+
+        androidTest {
+            java.srcDirs += "$projectDir/src/sharedTest/java"
+        }
+    }
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.guava:guava:22.0'
     }
 }
 
-apply from: '../common.gradle'
-apply from: 'app_dependencies.gradle'
+task testBuild {}
+
+testBuild.dependsOn('clean', 'ktlint', 'lintStandardRelease', 'testStandardDebugUnitTest', 'testStandardReleaseUnitTest', 'assembleDebug', 'assembleRelease')
+
+apply from: '../klint.gradle'
+
+dependencies {
+    ktlint "com.github.shyiko:ktlint:$ktLintRulesVer"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
+
+    implementation "com.android.support:cardview-v7:$supportLibraryVer"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVer"
+    implementation "com.android.support:design:$supportLibraryVer"
+
+    implementation "com.jakewharton.timber:timber:$timberVer"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxVer"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVer"
+
+    implementation "android.arch.persistence.room:runtime:$roomDbVer"
+    implementation "android.arch.persistence.room:rxjava2:$roomDbVer"
+    kapt "android.arch.persistence.room:compiler:$roomDbVer"
+
+
+    implementation "com.google.dagger:dagger:$daggerVer"
+    implementation "com.google.dagger:dagger-android:$daggerVer"
+    implementation "com.google.dagger:dagger-android-support:$daggerVer"
+
+    compile "com.trello.rxlifecycle2:rxlifecycle:$rxLifecycleVer"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rxLifecycleVer"
+    compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxLifecycleVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBindingVer"
+    compile "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxBindingVer"
+
+    compile "com.f2prateek.rx.preferences2:rx-preferences:$rxPrefVer"
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
+    compileOnly "org.glassfish:javax.annotation:$javaXVer"
+
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVer"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVer"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVer"
+    implementation "com.google.code.gson:gson:$gsonVer"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVer"
+
+//    compile "net.danlew:android.joda:$jodaAndroidVer"
+
+    testImplementation "junit:junit:$junitVer"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVer"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVer"
+    testImplementation "org.robolectric:robolectric:$robolectricVer"
+    testImplementation "org.mockito:mockito-core:$mockitoVer"
+//    testCompile "joda-time:joda-time:$jodaVer"
+
+    testImplementation "org.apache.commons:commons-lang3:$commonsVer"
+    kaptTest "com.google.dagger:dagger-compiler:$daggerVer"
+
+    androidTestCompile "com.google.code.findbugs:jsr305:$jsr305Ver"
+
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVer", {
+        exclude group: 'com.google.code.findbugs'
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espressoVer", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+
+    androidTestCompile "junit:junit:$junitVer"
+    androidTestCompile "org.mockito:mockito-core:$mockitoVer"
+    androidTestCompile "com.google.dexmaker:dexmaker:$dexMakerVer"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:$dexMakerVer"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerVer"
+
+
+
+}
