@@ -5,7 +5,11 @@ import com.simplyapp.plate.calculator.BuildConfig
 import com.simplyapp.plate.calculator.GradleRobolectricTestRunner
 import com.simplyapp.plate.calculator.data.model.Plate
 import com.simplyapp.plate.calculator.data.model.PlateConstants
-import org.junit.*
+import org.junit.After
+import org.junit.Assert
+import org.junit.Before
+import org.junit.FixMethodOrder
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
 import org.robolectric.RuntimeEnvironment

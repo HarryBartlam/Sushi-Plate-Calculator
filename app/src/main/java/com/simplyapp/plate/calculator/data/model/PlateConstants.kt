@@ -32,14 +32,14 @@ class PlateConstants {
 
         val PRE_FILL_DATABASE = """INSERT INTO $PLATE_TABLE_NAME ($PLATE_ID, $PLATE_NAME, $PLATE_NUMBER, $PLATE_TYPE)
                             VALUES
-                            (${PLATE_ID_GREEN}, "Green Plate", 0, "${PlateType.GREEN_PLATE}"),
-                            (${PLATE_ID_BLUE}, "Blue Plate", 0, "${PlateType.BLUE_PLATE}"),
-                            (${PLATE_ID_PURPLE}, "Purple Plate", 0, "${PlateType.PURPLE_PLATE}"),
-                            (${PLATE_ID_ORANGE}, "Orange Plate", 0, "${PlateType.ORANGE_PLATE}"),
-                            (${PLATE_ID_PINK}, "Pink Plate", 0, "${PlateType.PINK_PLATE}"),
-                            (${PLATE_ID_GRAY}, "Gray Plate", 0, "${PlateType.GRAY_PLATE}"),
-                            (${PLATE_ID_GOLD}, "Gold Plate", 0, "${PlateType.GOLD_PLATE}"),
-                            (${PLATE_ID_SUMO}, "Sumo Plate", 0, "${PlateType.SUMO_PLATE}")
+                            ($PLATE_ID_GREEN, "Green Plate", 0, "${PlateType.GREEN_PLATE}"),
+                            ($PLATE_ID_BLUE, "Blue Plate", 0, "${PlateType.BLUE_PLATE}"),
+                            ($PLATE_ID_PURPLE, "Purple Plate", 0, "${PlateType.PURPLE_PLATE}"),
+                            ($PLATE_ID_ORANGE, "Orange Plate", 0, "${PlateType.ORANGE_PLATE}"),
+                            ($PLATE_ID_PINK, "Pink Plate", 0, "${PlateType.PINK_PLATE}"),
+                            ($PLATE_ID_GRAY, "Gray Plate", 0, "${PlateType.GRAY_PLATE}"),
+                            ($PLATE_ID_GOLD, "Gold Plate", 0, "${PlateType.GOLD_PLATE}"),
+                            ($PLATE_ID_SUMO, "Sumo Plate", 0, "${PlateType.SUMO_PLATE}")
                         """.trimIndent()
     }
 }
