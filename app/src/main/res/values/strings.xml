@@ -52,12 +52,13 @@
     <string name="error">error</string>
     <string name="default_plate_value">£0</string>
 
-    <string name="dialog_cancel">cancel</string>
-    <string name="dialog_save">save</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_save">Save</string>
     <string name="hint_plate_value">Plate Value</string>
     <string name="cat">Cat</string>
     <string name="category_plates">Plates</string>
     <string name="category_misc">Misc</string>
+    <string name="discount_title">Discount:</string>
     <string name="dialog_discount_message">Enter you discount below</string>
     <string name="dialog_discount_title">Discount</string>
     <string name="hint_plate_discount">Discount</string>
